@@ -94,3 +94,14 @@ main {
 }
 
 /* AGGIUNGI HOVER PER AlbumCard DOVE SI INGRANDISCE (SCALE) CON UNA TRANSITION IN HOVER */
+
+.spinner {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

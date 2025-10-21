@@ -1,19 +1,31 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import AlbumList from "../components/albums/AlbumList";
+import NotFoundPage from "./NotFoundPage";
+import Loader from "../components/ui/Loader";
 
 export default function GendreDetailPage() {
   const { genreId } = useParams();
   const [genre, setGenre] = useState();
+  const [notFound, setNotFound] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  if (isNaN(Number(genreId))) return <NotFoundPage />;
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`http://localhost:8080/api/genres/${genreId}`)
-      .then((res) => setGenre(res.data));
+      .then((res) => setGenre(res.data))
+      .catch((err) => {
+        if (err.response?.status === 404) setNotFound(true);
+      })
+      .finally(() => setLoading(false));
   }, [genreId]);
 
-  if (!genre) return <h1>caricamento</h1>; // SEMPRE COMPONENTE DI CARICAMENTO, DA GESTIRE MEGLIO
+  if (notFound) return <NotFoundPage />;
+  if (loading || !genre) return <Loader />;
 
   return (
     <main>
@@ -22,7 +34,11 @@ export default function GendreDetailPage() {
         <p>{genre.description}</p>
         <section className="mt-5">
           <h3>Album di questo Genere:</h3>
-          <AlbumList albums={genre.albums} />
+          {genre.albums.length > 0 ? (
+            <AlbumList albums={genre.albums} />
+          ) : (
+            <p>Non ci sono Album appartenenti a questo Genere</p>
+          )}
         </section>
       </div>
     </main>

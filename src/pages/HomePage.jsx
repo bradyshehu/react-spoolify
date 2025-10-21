@@ -1,21 +1,27 @@
 import { useEffect, useState } from "react";
 import AlbumList from "../components/albums/AlbumList";
 import axios from "axios";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
+import Loader from "../components/ui/Loader";
 
 // QUI CHIAMATA SOLO PER VEDERE I PRIMI ELEMENTI
 
 export default function HomePage() {
   const [albums, setAlbums] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     axios
-      .get(`http://localhost:8080/api/albums?page=${page}${urlParams}`)
-      .then((res) => setAlbums(res.data.content));
-  }, [page, urlParams]);
+      .get(`http://localhost:8080/api/albums`)
+      .then((res) => setAlbums(res.data.content))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) return <Loader />;
 
   return (
-    <main>
+    <main className="min-vh-100">
       <section id="hero" className="position-relative overflow-hidden py-5">
         <div className="container ">
           <div className="row justify-content-center">

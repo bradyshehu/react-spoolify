@@ -1,20 +1,28 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import AlbumList from "../components/albums/AlbumList";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
+import Loader from "../components/ui/Loader";
 
 export default function AlbumsPage() {
   const [albums, setAlbums] = useState([]);
   const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
   // const [size, setSize] = useState(12);
   const [inputName, setInputName] = useState("");
   const [searchedName, setSearchedName] = useState("");
   // const [searchedGenre, setSearchedGenre] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`http://localhost:8080/api/albums?name=${searchedName}&page=${page}`)
-      .then((res) => setAlbums(res.data.content));
+      .then((res) => {
+        setAlbums(res.data.content);
+        setTotalPages(res.data.totalPages);
+      })
+      .finally(() => setLoading(false));
   }, [page, searchedName]);
 
   function handleChange(e) {
@@ -25,6 +33,8 @@ export default function AlbumsPage() {
     setSearchedName(inputName);
     setPage(0);
   }
+
+  if (loading) return <Loader />;
 
   return (
     <main>
@@ -48,8 +58,11 @@ export default function AlbumsPage() {
               </form>
             </div>
           </div>
-
-          <AlbumList albums={albums} />
+          {albums.length > 0 ? (
+            <AlbumList albums={albums} />
+          ) : (
+            <p className="py-5">Non ci sono Album al momento.</p>
+          )}
           <div className="d-flex justify-content-between m-auto">
             <Link to={-1} className="btn btn-secondary">
               Torna indietro
@@ -64,7 +77,11 @@ export default function AlbumsPage() {
                   Album precedenti
                 </button>
               )}
-              <button className="btn" onClick={() => setPage(page + 1)}>
+              <button
+                className="btn"
+                onClick={() => setPage(page + 1)}
+                disabled={page + 1 >= totalPages}
+              >
                 Album successivi
               </button>
             </div>

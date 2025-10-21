@@ -1,5 +1,5 @@
 import { ListGroup, ListGroupItem } from "react-bootstrap";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 export default function AlbumDetail({ album }) {
   return (
@@ -33,7 +33,7 @@ export default function AlbumDetail({ album }) {
               <strong>Generi:</strong>
             </p>
             {album.genres.map((g) => (
-              <Link to={`http://localhost:5173/genres/${g.id}`}>
+              <Link key={g.id} to={`/genres/${g.id}`}>
                 <div className="badge secondary-bg mx-1">{g.name}</div>
               </Link>
             ))}
