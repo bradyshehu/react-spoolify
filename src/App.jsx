@@ -7,6 +7,8 @@ import HomePage from "./pages/HomePage";
 import AlbumsPage from "./pages/AlbumsPage";
 import GenresPage from "./pages/GenresPage";
 import DefaultLayout from "./layouts/DefaultLayout";
+import AlbumDetailPage from "./pages/AlbumDetailPage";
+import GenreDetailPage from "./pages/GenreDetailPage";
 
 export default function App() {
   return (
@@ -16,7 +18,9 @@ export default function App() {
           <Route element={<DefaultLayout />}>
             <Route index element={<HomePage />} />
             <Route path="/albums" element={<AlbumsPage />} />
+            <Route path="/albums/:albumId" element={<AlbumDetailPage />} />
             <Route path="/genres" element={<GenresPage />} />
+            <Route path="/genres/:genreId" element={<GenreDetailPage />} />
           </Route>
           {/* RICORDA IMPORT DI DefaultLayout E DELLE ALTRE PAGINE, QUESTA É SOLO STRUTTURA DI BASE */}
         </Routes>

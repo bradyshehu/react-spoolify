@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import AlbumList from "../components/albums/AlbumList";
 import axios from "axios";
+import { Link } from "react-router";
 
 // QUI CHIAMATA SOLO PER VEDERE I PRIMI ELEMENTI
 
 export default function HomePage() {
   const [albums, setAlbums] = useState([]);
-  const [page, setPage] = useState(0);
-  const [urlParams, setUrlParams] = useState("");
 
   useEffect(() => {
     axios
@@ -26,7 +25,9 @@ export default function HomePage() {
                 className="mb-4 d-inline-flex align-items-center gap-2 px-4 py-2 rounded-pill bg-primary bg-opacity-10 border border-primary border-opacity-25"
               >
                 {/* <span className="me-2 fs-5">🎵</span> DOVRÁ ESSERE UN LINK */}
-                <span className="fw-medium">Scopri gli Album</span>
+                <Link to={`/albums`} className="fw-medium">
+                  Scopri Tutti gli Album
+                </Link>
               </div>
               <h1 className="display-4 fw-bold mt-3 mb-4">
                 I Tuoi Album Preferiti Ti Aspettano

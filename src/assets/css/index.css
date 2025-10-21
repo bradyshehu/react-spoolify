@@ -6,8 +6,18 @@
 
 /* GENERICHE PER STILE */
 
+a {
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
 .primary-bg {
   background-color: var(--primary-color) !important;
+  border-color: var(--secondary-color) !important;
+}
+.secondary-bg {
+  background-color: var(--secondary-color) !important;
+  border-color: white !important;
 }
 .border-primar {
   border-color: var(--secondary-color) !important;
@@ -77,6 +87,10 @@ main {
   width: 100%;
   height: 100%;
   /* object-fit: cover; */
+}
+
+.album-cover.detail {
+  border-radius: 2rem;
 }
 
 /* AGGIUNGI HOVER PER AlbumCard DOVE SI INGRANDISCE (SCALE) CON UNA TRANSITION IN HOVER */
