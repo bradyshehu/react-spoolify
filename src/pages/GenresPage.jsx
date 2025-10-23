@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import GenreList from "../components/genres/GenresList";
 import Loader from "../components/ui/Loader";
+import { Link } from "react-router";
 
 export default function GenresPage() {
   const [genres, setGenres] = useState([]);
@@ -24,6 +25,14 @@ export default function GenresPage() {
         <section>
           <GenreList genres={genres} />
         </section>
+        <div className="d-flex justify-content-between m-auto">
+          <Link to={-1} className="btn btn-secondary">
+            Torna indietro
+          </Link>
+          <Link to={"/"} className="btn btn-prim">
+            Vai alla Home
+          </Link>
+        </div>
       </div>
     </main>
   );

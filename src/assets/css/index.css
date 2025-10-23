@@ -105,3 +105,9 @@ main {
   justify-content: center;
   align-items: center;
 }
+
+.btn-prim {
+  background-color: var(--secondary-color) !important;
+  color: white !important;
+  border-color: white !important;
+}

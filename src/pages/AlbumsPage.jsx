@@ -34,6 +34,9 @@ export default function AlbumsPage() {
     setPage(0);
   }
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [page, searchedName]);
   if (loading) return <Loader />;
 
   return (
@@ -44,17 +47,26 @@ export default function AlbumsPage() {
           <div className="row">
             <div className="col-lg-3 col-md-6 col-sm-12">
               <form onSubmit={handleSubmit}>
-                <label htmlFor="nameSearch" className="form-label">
-                  Cerca per nome
-                </label>
-                <input
-                  id="nameSearch"
-                  className="form-control"
-                  type="text"
-                  value={inputName}
-                  onChange={handleChange}
-                  placeholder="Inserisci l'album..."
-                />
+                <div className="d-flex align-items-end">
+                  <div>
+                    <label htmlFor="nameSearch" className="form-label">
+                      Cerca per nome
+                    </label>
+                    <input
+                      id="nameSearch"
+                      className="form-control"
+                      type="text"
+                      value={inputName}
+                      onChange={handleChange}
+                      placeholder="Inserisci l'album..."
+                    />
+                  </div>
+                  <div>
+                    <button className="btn btn-prim ms-2" type="submit">
+                      Cerca
+                    </button>
+                  </div>
+                </div>
               </form>
             </div>
           </div>
@@ -63,22 +75,25 @@ export default function AlbumsPage() {
           ) : (
             <p className="py-5">Non ci sono Album al momento.</p>
           )}
-          <div className="d-flex justify-content-between m-auto">
+          <div className="d-flex justify-content-between m-auto mt-3">
             <Link to={-1} className="btn btn-secondary">
               Torna indietro
             </Link>
             <div>
               {page == 0 ? (
-                <button className="btn" disabled>
+                <button className="btn btn-prim" disabled>
                   Album precedenti
                 </button>
               ) : (
-                <button className="btn" onClick={() => setPage(page - 1)}>
+                <button
+                  className="btn btn-prim"
+                  onClick={() => setPage(page - 1)}
+                >
                   Album precedenti
                 </button>
               )}
               <button
-                className="btn"
+                className="btn btn-prim ms-2"
                 onClick={() => setPage(page + 1)}
                 disabled={page + 1 >= totalPages}
               >

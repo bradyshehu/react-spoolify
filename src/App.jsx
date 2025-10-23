@@ -10,11 +10,13 @@ import DefaultLayout from "./layouts/DefaultLayout";
 import AlbumDetailPage from "./pages/AlbumDetailPage";
 import GenreDetailPage from "./pages/GenreDetailPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import ScrollToTop from "./components/ui/ScrollToTop";
 
 export default function App() {
   return (
     <>
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route element={<DefaultLayout />}>
             <Route index element={<HomePage />} />

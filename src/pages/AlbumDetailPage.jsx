@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import AlbumDetail from "../components/albums/AlbumDetail";
 import NotFoundPage from "./NotFoundPage";
 import Loader from "../components/ui/Loader";
@@ -31,6 +31,14 @@ export default function AlbumDetailPage() {
     <main>
       <div className="container min-vh-100">
         <AlbumDetail album={album} />
+        <div className="d-flex justify-content-between m-auto mt-3">
+          <Link to={-1} className="btn btn-secondary">
+            Torna indietro
+          </Link>
+          <Link to={"/albums"} className="btn btn-prim">
+            Vai agli Album
+          </Link>
+        </div>
       </div>
     </main>
   );

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import AlbumList from "../components/albums/AlbumList";
 import NotFoundPage from "./NotFoundPage";
 import Loader from "../components/ui/Loader";
@@ -40,6 +40,14 @@ export default function GendreDetailPage() {
             <p>Non ci sono Album appartenenti a questo Genere</p>
           )}
         </section>
+        <div className="d-flex justify-content-between m-auto mt-3">
+          <Link to={-1} className="btn btn-secondary">
+            Torna indietro
+          </Link>
+          <Link to={"/genres"} className="btn btn-prim">
+            Vai ai Generi
+          </Link>
+        </div>
       </div>
     </main>
   );
